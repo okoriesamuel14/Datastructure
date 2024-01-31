@@ -1,0 +1,117 @@
+// Problem 1
+ALGORITHM SumOfDistinctElements
+// Computes the sum of distinct elements from two sets
+VAR
+    set1 : ARRAY_OF INTEGER[4];
+    set2 : ARRAY_OF INTEGER[5];
+    sum : INTEGER := 0;
+BEGIN
+ // Initialize sets
+    set1=[3, 1, 7, 9]
+    set2=[2, 4, 1, 9, 3];
+   // Iterate over elements of set1
+    FOR i FROM 0 TO set1.length-1 STEP 1  DO
+    // Check if the current element is present in set2
+        FOR j FROM 0 TO set2.length-1 STEP 1  DO
+            IF (set1[i] = set2[j]) THEN
+                break;
+            END_IF
+        END_FOR
+  // If the element is not present in set2, add it to the sum
+        IF (j=set2.length) THEN
+            sum = sum +set1[i]
+        END_IF
+    END_FOR
+ // Iterate over elements of set2 using a similar process
+    FOR i FROM 0 TO set2.length-1 STEP 1  DO
+        FOR j FROM 0 TO set1.length-1 STEP 1  DO
+            IF (set2[i] = set1[j]) THEN
+                break;
+            END_IF
+        END_FOR
+
+        IF (j=set1.length) THEN
+            sum = sum +set2[i]
+        END_IF
+    END_FOR
+ // Print the final sum of distinct elements
+    Write(sum)
+
+END
+
+
+// Problem 2
+PROCEDURE procedure_name(arr1 : ARRAY_OF INTEGER[], arr2 : ARRAY_OF INTEGER[], total: INTEGER)
+// Computes the dot product of two arrays and stores the result in 'total'
+
+VAR
+
+BEGIN
+    total:=0
+        // Check if the arrays have the same length
+    IF (arr1.length <> arr2.length) THEN
+        break;
+    END_IF
+ // Iterate over elements of both arrays and calculate the dot product
+    FOR i FROM 0 TO arr1.length-1  STEP 1  DO
+        total:= total + (arr1[i] *arr2[i])
+    END_FOR
+    
+
+END
+
+
+
+
+
+FUNCTION dot_product(arr1 : ARRAY_OF INTEGER[], arr2 : ARRAY_OF INTEGER[] ) : INTEGER
+// Computes the dot product of two arrays and returns the result
+VAR
+    total : INTEGER:= 0;
+BEGIN
+   // Check if the arrays have the same length
+    IF (arr1.length <> arr2.length) THEN
+        RETURN "They are not of the same length"  // Return an error message
+    END_IF
+// Iterate over elements of both arrays and calculate the dot product
+    FOR i FROM 0 TO arr1.length-1  STEP 1  DO
+        total:= total + (arr1[i] *arr2[i])
+    END_FOR
+       // Return the computed dot product 
+    RETURN total ;
+END
+
+
+
+
+// Checks if vectors are orthogonal based on their dot products
+ALGORITHM orthogonal
+VAR
+    v1 : ARRAY_OF INTEGER[4];
+    v2 : ARRAY_OF INTEGER[4];
+    v3 : ARRAY_OF INTEGER[4];
+BEGIN
+ // Initialize vectors
+    v1=[1,0,0,1]
+    v2=[0,1,0,0]
+    v3=[0,0,0,1]
+// Check if v1 and v2 are orthogonal vectors
+    IF (dot_product(v1,v2)=0) THEN //v1 and v2 are 
+        Write("v1 and v2 are othogonal vectors")
+    ELSE
+        Write("v1 and v2 they are not othogonal")
+    END_IF
+ // Check if v1 and v3 are orthogonal vectors
+    IF (dot_product(v1,v3)=0) THEN //v1 and v3 are not 
+        Write("v1 and v3 are othogonal vectors")
+    ELSE
+        Write("v1 and v3 they are not othogonal")
+    END_IF
+    // Check if v2 and v3 are orthogonal vectors
+    IF (dot_product(v2,v3)=0) THEN //v2 and v are orthogonal
+        Write("v2 and v3 are othogonal vectors")
+    ELSE
+        Write("v2 and v3 they are not othogonal")
+    END_IF
+
+END
